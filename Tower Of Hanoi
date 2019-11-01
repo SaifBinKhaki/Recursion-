@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+void towerOfHanoi(int disks, char start, char end, char dock);
+int main() {
+    int disks;
+    cout << "There are how many disks: " << endl;
+    cin >> disks;
+    char start = 'A';
+    char end = 'C';
+    char dock = 'B';
+    towerOfHanoi(disks, start, end, dock);
+    return 0;
+}
+void towerOfHanoi(int disks, char start, char end, char dock){
+    if(disks == 1)
+        cout << "Move from " << start << " to " << end << endl;
+    else {
+        towerOfHanoi(disks - 1, start, dock, end);
+        cout << "Move from " << start << " to " << end << endl;
+        towerOfHanoi(disks - 1, dock, end, start);
+    }
+}
