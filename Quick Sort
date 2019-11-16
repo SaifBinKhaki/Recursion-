@@ -1,0 +1,46 @@
+#include <iostream>
+#include <time.h>
+using namespace std;
+void print(int arr[], int size);
+int partition(int arr[], int pivot, int start);
+void quickSort(int arr[], int pivot, int start);
+int main(){
+    int arr1[6];
+    srand(time(0));
+    int arr1_size = sizeof(arr1)/ sizeof(arr1[0]);
+    for (int i = 0; i < 6; ++i) {
+            arr1[i] = rand()%10;
+     }
+    print(arr1, arr1_size);
+    quickSort(arr1, arr1_size-1, 0);
+    print(arr1, arr1_size);
+}
+void quickSort(int arr[], int pivot, int start){
+    if (pivot > start) {
+        int q = partition(arr, pivot, start);
+        quickSort(arr, q-1, start);
+        quickSort(arr, pivot, q+1);
+    }
+}
+int partition(int arr[], int pivot, int start) {
+    int larger = -1;
+    int swapped = pivot;
+    for (int i = start; i <= pivot; i++) {
+        if(arr[i]>arr[pivot] && larger==-1)
+            larger=i;
+        if(arr[i]<=arr[pivot] && larger!=-1) {
+            swap(arr[i], arr[larger]);
+            if(arr[i]==arr[pivot])
+                swapped = larger;
+            larger++;
+        }
+    }
+    return swapped;
+}
+
+void print(int arr[], int size){
+    cout << endl;
+    for (int i = 0; i < size; ++i) {
+        cout << arr[i] << "  ";
+    }
+}
